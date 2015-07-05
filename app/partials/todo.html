@@ -1,0 +1,39 @@
+<div style="margin:0 auto;width: 50%;" ng-controller="ToDoController">
+
+    <div class="container-fluid">
+        <h1>Todo List</h1>
+        <div class="form-group" style="height: 230px;overflow: auto">
+            <div ng-repeat="list in todoList track by list.id">
+                <div class="col-md-10 bg-success" style="margin-bottom: 5px; border-radius: 5px; min-height: 70px;">
+                    <div ng-bind="list.name"></div>
+                    <div ng-bind="list.description" style="font-style: italic"></div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" style="width: 100%" ng-click="editToDoList($index)">Edit</button>
+                </div>
+                <div class="col-md-2" style="padding-top: 3px;">
+                    <button class="btn btn-danger" style="width: 100%" ng-click="removeToDoList($index)">Remove</button>
+                </div>
+            </div>
+            <div ng-if="todoList.length === 0">
+                <p class="bg-danger" style="height: 40px;padding: 10px 10px 20px 20px; font-weight: bold">No List Exist</p>
+            </div>
+        </div>
+        <div class="clearfix" style="margin-top: 40px;"></div>
+        <br>
+        <hr>
+        <div class="bg-info" style="height: 30px;padding: 5px 5px 5px 5px;" ng-if="editMode">
+            <p>In edit mode now..</p>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter todo name" ng-model="toDo.name">
+            <p ng-show="isError" class="bg-danger" style="padding: 5px 5px 5px 5px;margin-top: 5px; border-radius: 5px;" ng-bind="errorMessage"></p>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="textarea" class="form-control" id="description" placeholder="Enter Description" ng-model="toDo.description">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="addToDoList()">Submit</button>
+    </div>
+</div>
