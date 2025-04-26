@@ -13,5 +13,5 @@ app.get('/*', function(req, res) {
     res.redirect('/todo')
 });
 
-let PORT = process.env.PORT || 9099;
+const PORT = process.env.PORT || 9099;
 app.listen(PORT);
