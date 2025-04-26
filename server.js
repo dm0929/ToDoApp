@@ -1,5 +1,8 @@
 var express = require('express'),
     app = express();
+
+var INDEXING = true;
+
 app.use(express.static(__dirname));
 app.use(function (req, res, next) {
   console.log('Time:', Date.now());
@@ -12,4 +15,6 @@ app.get('/todo', function(req, res){
 app.get('/*', function(req, res) {
     res.redirect('/todo')
 });
-app.listen(9099);
+
+let PORT = process.env.PORT || 9099;
+app.listen(PORT);
