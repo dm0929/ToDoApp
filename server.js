@@ -12,4 +12,6 @@ app.get('/todo', function(req, res){
 app.get('/*', function(req, res) {
     res.redirect('/todo')
 });
-app.listen(9099);
+
+let PORT = process.env.PORT || 9099;
+app.listen(PORT);
