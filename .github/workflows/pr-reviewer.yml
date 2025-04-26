@@ -12,8 +12,17 @@ jobs:
   pr_review:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug Token Presence
+        run: |
+          if [ -z "${{ secrets.GITHUB_TOKEN }}" ]; then
+            echo "::error::GITHUB_TOKEN secret is empty or not available!"
+            exit 1
+          else
+            echo "GITHUB_TOKEN secret seems available (not empty)."
+          fi
       - name: Run AI PR Reviewer
         uses: dm0929/ai-pr-reviewer-action@main
+        id: review
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
