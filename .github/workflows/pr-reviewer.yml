@@ -1,0 +1,26 @@
+name: AI PR Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pr_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run AI PR Reviewer
+        uses: dm0929/ai-pr-reviewer-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Check Action Outputs
+        if: always()
+        run: |
+          echo "--- AI Review Action Outputs ---"
+          echo "Review Passed Output: ${{ steps.review.outputs.review-passed }}"
+          echo "Comment ID Output: ${{ steps.review.outputs.review-comment-id }}"
+          echo "--------------------------------"
