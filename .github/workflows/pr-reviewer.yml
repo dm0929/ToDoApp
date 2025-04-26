@@ -15,7 +15,7 @@ jobs:
       - name: Run AI PR Reviewer
         uses: dm0929/ai-pr-reviewer-action@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Check Action Outputs
         if: always()
